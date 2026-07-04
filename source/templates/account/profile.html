@@ -2,18 +2,17 @@
 
 {% block content %}
 <div class="container my-4" style="max-width: 800px;">
-    <div class="card mb-4 border-0 shadow-sm bg-white p-4">
-        <div class="d-flex align-items-center gap-4">
-            <img src="{{ author.avatar.url }}"
+<div class="card mb-4 border-0 shadow-sm bg-white p-4">
+    <div class="d-flex align-items-center gap-4">
+            <img src="{{ author_obj.avatar.url }}"
                  class="rounded-circle border"
                  style="width: 120px; height: 120px; object-fit: cover;"
                  alt="Аватар">
-
             <div>
-                <h2 class="mb-1 text-dark">{{ author.username }}</h2>
-                <p class="text-muted mb-2"><i class="fa-regular fa-envelope me-1"></i> {{ author.email }}</p>
+                <h2 class="mb-1 text-dark">{{ author_obj.username }}</h2>
+                <p class="text-muted mb-2"><i class="fa-regular fa-envelope me-1"></i> {{ author_obj.email }}</p>
                 <span class="badge bg-primary fs-6 p-2">
-                    Всего комментариев: {{ author.get_comments_count }}
+                    Всего комментариев: {{ author_obj.get_comments_count }}
                 </span>
             </div>
         </div>

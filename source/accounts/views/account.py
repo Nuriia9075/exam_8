@@ -25,8 +25,9 @@ class RegisterView(CreateView):
 class AuthorDetailView(DetailView):
     model = Author
     template_name = 'account/profile.html'
-    context_object_name = 'author'
+    context_object_name = 'author_obj'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['topics'] = self.object.posts.all()
+        return context

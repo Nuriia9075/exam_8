@@ -25,7 +25,3 @@ class AnswerCreationForm(forms.ModelForm):
         model = Answer
         fields =['text']
         widgets = {'text': forms.Textarea(attrs={'class':'form-control','rows': 5})}
-
-#
-# class SimpleSearchForm(forms.Form):
-#     search = forms.CharField(max_length=100, required=False, label="")

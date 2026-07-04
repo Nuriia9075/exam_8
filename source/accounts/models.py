@@ -18,6 +18,8 @@ class Author(AbstractUser):
 
     def __str__(self):
         return self.username + "'s User"
+    def get_comments_count(self):
+        return self.author_answers.count()
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -39,7 +41,7 @@ class Topic(models.Model):
 
 class Answer(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=False, null=False, related_name='answers')
-    author = models.ForeignKey(Author, on_delete=models.RESTRICT, blank=False, null=False, related_name='answers')
+    author = models.ForeignKey(Author, on_delete=models.RESTRICT, blank=False, null=False, related_name='author_answers')
     created_at=models.DateTimeField(auto_now_add=True)
     text = models.TextField(blank=False, null=False, verbose_name="Описание")
 

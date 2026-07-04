@@ -1,12 +1,14 @@
 from urllib.parse import urlencode
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from accounts.models import Topic
+from accounts.models import Topic, Answer
 from accounts.forms import TopicForm, AnswerCreationForm
+from django.core.paginator import Paginator
+
 
 
 class TopicListView(ListView):
@@ -14,7 +16,7 @@ class TopicListView(ListView):
     context_object_name = "topics"
     ordering = ["-created_at"]
     queryset = Topic.objects.select_related('author')
-    paginate_by = 8
+    paginate_by = 5
     paginate_orphans = 1
 
 
@@ -26,17 +28,25 @@ class TopicCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
     # def get_success_url(self):
-    #     return reverse("topic_detail", kwargs={"pk": self.object.pk})
+    #     return reverse("account:topic_detail", kwargs={"pk": self.object.pk})
 
 
 class TopicDetailView(DetailView):
     template_name = "topic/topic_detail.html"
     queryset = Topic.objects.select_related('author').prefetch_related('answers__author')
+    paginate_by = 5
+    paginate_orphans = 1
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        answers_list = self.object.answers.all()
+        paginator = Paginator(answers_list, self.paginate_by, orphans=self.paginate_orphans)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        context['paginator'] = paginator
+        context['is_paginated'] = page_obj.has_other_pages()
         context['form'] = AnswerCreationForm()
         return context
 
@@ -55,42 +65,24 @@ class TopicDetailView(DetailView):
         context['form'] = form
         return self.render_to_response(context)
 
-# class ArticleDetailView(DetailView):
-#     template_name = "articles/article_view.html"
-#     model = Article
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['comments'] = self.object.comments.filter(author='asdqwe')
-#         return context
-#
-#
+class AnswerUpdateView(UserPassesTestMixin, UpdateView):
+    model = Answer
+    form_class = AnswerCreationForm
+    template_name = "answer/answer_update.html"
 
-#
-#
-# class ArticleUpdateView(UpdateView):
-#     template_name = "articles/article_update.html"
-#     form_class = ArticleForm
-#     model = Article
-#     # queryset = Article.objects.all()
-#
-#     # def get_success_url(self):
-#     #     return reverse("detail", kwargs={"pk": self.object.pk})
-#
-# class ArticleDeleteView(DeleteView):
-#     template_name = "articles/delete_confirm.html"
-#     model = Article
-#     form_class = ArticleDeleteForm
-#     success_url = reverse_lazy("list")
-#
-#     def get_form_kwargs(self):
-#         kwargs = super().get_form_kwargs()
-#
-#         if self.request.method == 'POST':
-#             kwargs['instance'] = self.object
-#         return kwargs
-#
-#     # def post(self, request, *args, **kwargs):
-#     #     article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
-#     #     article.delete()
-#     #     return redirect("list")
+    def test_func(self):
+        return self.get_object().author == self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy("account:topic_detail", kwargs={"pk": self.object.topic.pk})
+
+
+class AnswerDeleteView(UserPassesTestMixin, DeleteView):
+    model = Answer
+    template_name = "answer/delete_confirm.html"
+
+    def test_func(self):
+        return self.get_object().author == self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy("account:topic_detail", kwargs={"pk": self.object.topic.pk})

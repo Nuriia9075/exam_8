@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path
-from .views.topic import TopicListView, TopicCreateView, TopicDetailView
+from .views.topic import TopicListView, TopicCreateView, TopicDetailView,AnswerDeleteView,AnswerUpdateView
 from .views.account import RegisterView
 
 app_name = "account"
@@ -14,4 +14,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('topics/create/', TopicCreateView.as_view(), name="create_topic"),
     path('topics/<int:pk>/', TopicDetailView.as_view(), name="topic_detail"),
+    path('answers/<int:pk>/update/', AnswerUpdateView.as_view(), name='answer_update'),
+    path('answers/<int:pk>/delete/', AnswerDeleteView.as_view(), name='answer_delete'),
+
 ]

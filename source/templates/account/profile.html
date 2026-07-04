@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4" style="max-width: 800px;">
+    <div class="card mb-4 border-0 shadow-sm bg-white p-4">
+        <div class="d-flex align-items-center gap-4">
+            <img src="{{ author.avatar.url }}"
+                 class="rounded-circle border"
+                 style="width: 120px; height: 120px; object-fit: cover;"
+                 alt="Аватар">
+
+            <div>
+                <h2 class="mb-1 text-dark">{{ author.username }}</h2>
+                <p class="text-muted mb-2"><i class="fa-regular fa-envelope me-1"></i> {{ author.email }}</p>
+                <span class="badge bg-primary fs-6 p-2">
+                    Всего комментариев: {{ author.get_comments_count }}
+                </span>
+            </div>
+        </div>
+    </div>
+    <h4 class="mb-3 text-secondary">Темы созданные пользователем:</h4>
+    <div class="card border-0 shadow-sm bg-white">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" class="ps-3">Название темы</th>
+                    <th scope="col" style="width: 25%;">Дата создания</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topic in topics %}
+                <tr style="position: relative;">
+                    <td class="ps-3">
+                        <a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
+                            {{ topic.title }}
+                        </a>
+                    </td>
+                    <td><small class="text-muted">{{ topic.created_at|date:'d.m.Y H:i' }}</small></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center text-muted py-4">Нет тем</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -28,8 +28,8 @@ class TopicCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    # def get_success_url(self):
-    #     return reverse("account:topic_detail", kwargs={"pk": self.object.pk})
+    def get_success_url(self):
+        return reverse("account:topic_detail", kwargs={"pk": self.object.pk})
 
 
 class TopicDetailView(DetailView):

@@ -36,3 +36,16 @@ class Topic(models.Model):
         verbose_name = 'Тема'
         verbose_name_plural = 'Темы'
         ordering = ['-created_at']
+
+class Answer(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=False, null=False, related_name='answers')
+    author = models.ForeignKey(Author, on_delete=models.RESTRICT, blank=False, null=False, related_name='answers')
+    created_at=models.DateTimeField(auto_now_add=True)
+    text = models.TextField(blank=False, null=False, verbose_name="Описание")
+
+    def __str__(self):
+        return f'{self.pk} by {self.topic.title}'
+    class Meta:
+        verbose_name = 'Ответ'
+        verbose_name_plural='Ответы'
+        ordering = ['created_at']

@@ -1,0 +1,13 @@
+{% load django_bootstrap5 %}
+<div class="card my-5 {{ extra_classes }}">
+    <div class="card-header fs-4 text-center py-3">{{ form_title }}</div>
+    <div class="card-body">
+        <form action="" id="topic-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form layout="floating" %}
+            <div class="text-end pt-3 border-top mt-3">
+                <button type="submit" class="btn btn-primary">{{ btn_txt }}</button>
+            </div>
+        </form>
+    </div>
+</div>

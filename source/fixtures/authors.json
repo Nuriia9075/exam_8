@@ -1,0 +1,78 @@
+[
+{
+    "model": "accounts.author",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$nZchQC1eKnYxjtaQXCvEAO$5nXkXDuRuTx2otU1cG+31A3mh1qqmZUHi7xPbaQrRJ0=",
+        "last_login": "2026-07-04T09:22:58.568Z",
+        "is_superuser": false,
+        "username": "qwe",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-04T09:16:06.667Z",
+        "avatar": "avatars/qwe/luffy.jpeg",
+        "email": "qwe@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.author",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$9cCVTtOMc7oi5uFoeKD0dM$EzmpBteld+A5MNeUKjftFCRCTqY3U4m3s5CJrYruwvE=",
+        "last_login": "2026-07-04T11:16:35.319Z",
+        "is_superuser": false,
+        "username": "asd",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-04T09:49:58.423Z",
+        "avatar": "avatars/asd/images.jpeg",
+        "email": "asd@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.author",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$WIYBZch8TC9DoJTGL8BMc6$IhJlZscRgqayQuC+r8EpVMSBi0GKY5rPFUQJmJ/Mf/k=",
+        "last_login": "2026-07-04T12:04:07.939Z",
+        "is_superuser": true,
+        "username": "moder",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-07-04T11:53:34Z",
+        "avatar": "avatars/moder/images1111_M5Mb2WH.webp",
+        "email": "MODER@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.author",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$4EbZvAaqykWLzL5llBpLo2$XQCrx6G0iU5fIwPapl6v4YAhB6kHjdgPyYnf+naSDPA=",
+        "last_login": "2026-07-04T12:12:42.276Z",
+        "is_superuser": false,
+        "username": "123",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-07-04T12:12:34.904Z",
+        "avatar": "avatars/123/images.jpeg",
+        "email": "keny9075@gmail.com",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

@@ -31,7 +31,7 @@
         </a>
         <p>{{ answer.text }}</p>
         <small>{{ answer.created_at|date:"Y-m-d H:i" }}</small>
-       {% if request.user == answer.author %}
+       {% if request.user == answer.author or request.user.is_staff or request.user.is_superuser %}
         <div class="ms-2">
             <a href="{% url 'account:answer_update' pk=answer.pk %}" class="btn btn-link btn-sm text-secondary p-0 me-1" title="">
                 <i class="fa-solid fa-pen-to-square"></i>

@@ -34,10 +34,14 @@ class Topic(models.Model):
     def __str__(self):
         return f'{self.pk} by {self.author.username}'
 
+    def get_comments_count(self):
+        return self.answers.count()
+
     class Meta:
         verbose_name = 'Тема'
         verbose_name_plural = 'Темы'
         ordering = ['-created_at']
+
 
 class Answer(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=False, null=False, related_name='answers')

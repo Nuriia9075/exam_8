@@ -28,7 +28,7 @@
                 <td><a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
                     {{ topic.author.username }}</a></td>
                 <td><a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
-                    0</a>
+                    {{ topic.get_comments_count }}</a>
                 </td>
             </tr>
             {% empty %}

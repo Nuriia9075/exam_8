@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Author, Topic
+from .models import Author, Topic, Answer
 
 
 class AuthorCreationForm(UserCreationForm):
@@ -19,6 +19,12 @@ class TopicForm(forms.ModelForm):
             'title':forms.TextInput(attrs={'class':'form-control'}),
             'description': forms.Textarea(attrs={'class':'form-control','rows': 5}),
        }
+
+class AnswerCreationForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields =['text']
+        widgets = {'text': forms.Textarea(attrs={'class':'form-control','rows': 5})}
 
 #
 # class SimpleSearchForm(forms.Form):

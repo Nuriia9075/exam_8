@@ -19,15 +19,15 @@
             {% for topic in topics %}
             <tr style="position: relative;">
                 <td>
-                    <a href="#" class="stretched-link text-decoration-none text-dark fw-bold">
+                    <a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
                         {{ topic.title }}
                     </a>
                 </td>
-                <td><a href="#" class="stretched-link text-decoration-none text-dark fw-bold">
+                <td><a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
                     {{ topic.created_at|date:"d.m.Y" }}</a></td>
-                <td><a href="#" class="stretched-link text-decoration-none text-dark fw-bold">
+                <td><a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
                     {{ topic.author.username }}</a></td>
-                <td><a href="#" class="stretched-link text-decoration-none text-dark fw-bold">
+                <td><a href="{% url 'account:topic_detail' pk=topic.pk %}" class="stretched-link text-decoration-none text-dark fw-bold">
                     0</a>
                 </td>
             </tr>

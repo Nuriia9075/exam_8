@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-sm p-4" style="max-width: 600px; width: 100%;">
+        <div class="card-body pb-0">
+            {% include 'partial/form.html' with form_title="Вход в систему" btn_txt="Войти" %}
+        </div>
+        <hr class="text-muted my-4">
+        <div class="card-body pt-0 text-center">
+            <p class="text-secondary small mb-3">У вас еще нет аккаунта?</p>
+            <a href="{% url 'account:register' %}" class="btn btn-outline-primary w-100">
+                <span>Создать аккаунт</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
